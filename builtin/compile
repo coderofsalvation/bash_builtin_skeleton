@@ -1,0 +1,13 @@
+#!/bin/bash 
+[[ ! -d /usr/include/bash/builtins ]] && echo "please install bash-builtins to enable c extensions"] && exit 0
+CMD=hello
+
+gcc -fPIC -DHAVE_CONFIG_H -DSHELL  -g -O2 -fstack-protector \
+    --param=ssp-buffer-size=4 -Wformat -Wformat-security \
+    -Werror=format-security -Wall -I. -I.. -I/usr/include/bash \
+    -I/usr/include/bash/builtins -c -o "$CMD".o "$CMD".c
+
+gcc -shared -Wl,-soname,"$CMD"  -L./lib/termcap  -o "$CMD" "$CMD".o
+
+# enabling command
+enable -f ./$CMD $CMD

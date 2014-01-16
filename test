@@ -1,0 +1,17 @@
+#!/bin/bash 
+
+testcmd(){
+  echo "(..1000 calls..)"
+  for((i=0;i<1000;i++)); do "$@"; done  &>/dev/null
+}
+
+echo "testing builtin 'hello'"
+cd builtin; ./compile
+enable -f ./hello hello
+time testcmd hello
+cd ..; printf "\n\n\n"
+
+echo "testing standalone 'hello'"
+cd standalone; ./compile
+time testcmd ./hello_standalone
+cd ..
