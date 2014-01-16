@@ -26,7 +26,6 @@ bash_builtin_skeleton
 ### What is it
 
 Bash builtins enable you to extend bash with fast C/C++ commands, instead of relying on external programs only (=slow).
-By doing so, you can use bash as a scripting engine, similar to how C/C++ applications use lua for flexible scripting.
 
 ### Applications 
 
